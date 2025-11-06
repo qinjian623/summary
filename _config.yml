@@ -3,7 +3,8 @@ markdown: kramdown
 theme: minima   # GitHub Pages 默认允许使用
 defaults:
   - scope:
-      path: "summary"
+      path: "output"
+      type: "pages"
     values:
-      layout: null
-
+      layout: "page"
+      permalink: "/:path/summary.html"
