@@ -8,6 +8,7 @@ for root, _, files in os.walk(ROOT):
     for f in files:
         if f.endswith(".md"):
             path = os.path.join(root, f)
+            print(path)
             with open(path, "r", encoding="utf-8") as fp:
                 txt = fp.read()
             if not txt.startswith("---"):
