@@ -3,3 +3,4 @@ markdown: kramdown
 theme: minima   # GitHub Pages 默认允许使用
 exclude:
   - output
+  - vendor
