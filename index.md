@@ -7,6 +7,6 @@ title: 目录
 
 <ul>
 {% for post in site.posts %}
-  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  <li><a href="/summary{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
