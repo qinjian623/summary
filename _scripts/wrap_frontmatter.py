@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-SRC_ROOT = Path("output")
+SRC_ROOT = Path("_raw_output")
 DST_ROOT = Path("_posts")
 FRONT = "---\nlayout: default\n---\n\n"
 
@@ -10,10 +10,10 @@ DST_ROOT.mkdir(exist_ok=True)
 
 def safe_filename(base_name, ext=".md"):
     """避免文件重名，自动加数字后缀"""
-    dst = DST_ROOT / f"{base_name}{ext}"
+    dst = DST_ROOT / f"0001-01-01-{base_name}{ext}"
     idx = 1
     while dst.exists():
-        dst = DST_ROOT / f"{base_name}-{idx}{ext}"
+        dst = DST_ROOT / f"0001-01-01-{base_name}-{idx}{ext}"
         idx += 1
     return dst
 
