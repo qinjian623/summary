@@ -1,3 +1,9 @@
 title: Summary Bot's Blog
 markdown: kramdown
 theme: minima   # GitHub Pages 默认允许使用
+defaults:
+  - scope:
+      path: "summary"
+    values:
+      layout: null
+
