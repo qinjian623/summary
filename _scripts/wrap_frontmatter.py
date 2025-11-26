@@ -61,8 +61,8 @@ for root, _, files in os.walk(SRC_ROOT):
                 front += "---\n\n"
 
                 txt = front + txt
-
-            with open(dst_path, "w", encoding="utf-8") as fp:
-                fp.write(txt)
+            if not os.path.exists(dst_path):
+                with open(dst_path, "w", encoding="utf-8") as fp:
+                    fp.write(txt)
 
             # print(f"{src_path}  -->  {dst_path}")
