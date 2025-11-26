@@ -43,18 +43,18 @@ for root, _, files in os.walk(SRC_ROOT):
 
                 # print(os.path.exists(mp3_path))
                 if os.path.exists(mp3_path):
-                    # 获取 mp3 文件的修改时间
-                    mtime = os.path.getmtime(mp3_path)
+                    # 获取 mp3 文件的创建时间
+                    ctime = os.path.getctime(mp3_path)
                     date_str = datetime.fromtimestamp(
-                        mtime).strftime("%Y-%m-%d %H:%M:%S")
+                        ctime).strftime("%Y-%m-%d %H:%M:%S")
                     # print(date_str)
                 else:
-                    mtime = os.path.getmtime(src_path)
+                    ctime = os.path.getctime(src_path)
                     date_str = datetime.fromtimestamp(
-                        mtime).strftime("%Y-%m-%d %H:%M:%S")
-                    # print(date_str)
-                    # print(mp3_path)
+                        ctime).strftime("%Y-%m-%d %H:%M:%S")
 
+                    # print(mp3_path)
+                print(date_str)
                 front = "---\nlayout: default\n"
                 if date_str:
                     front += f"date: {date_str}\n"
