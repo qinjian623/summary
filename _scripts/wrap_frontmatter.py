@@ -8,6 +8,7 @@ DST_ROOT = Path("_posts")
 
 DST_ROOT.mkdir(exist_ok=True)
 
+
 def safe_filename(base_name, ext=".md"):
     """避免文件重名，自动加数字后缀"""
     dst = DST_ROOT / f"0001-01-01-{base_name}{ext}"
@@ -16,6 +17,7 @@ def safe_filename(base_name, ext=".md"):
         dst = DST_ROOT / f"0001-01-01-{base_name}-{idx}{ext}"
         idx += 1
     return dst
+
 
 for root, _, files in os.walk(SRC_ROOT):
     root_path = Path(root)
@@ -36,20 +38,31 @@ for root, _, files in os.walk(SRC_ROOT):
             # 如果没有 front matter，就加上
             if not txt.startswith("---"):
                 date_str = ""
+                # mp3_path = md path 同目录下的 audio.mp3
                 mp3_path = root_path / "audio.mp3"
-                if mp3_path.exists():
+
+                # print(os.path.exists(mp3_path))
+                if os.path.exists(mp3_path):
                     # 获取 mp3 文件的修改时间
                     mtime = os.path.getmtime(mp3_path)
-                    date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
-                
+                    date_str = datetime.fromtimestamp(
+                        mtime).strftime("%Y-%m-%d %H:%M:%S")
+                    # print(date_str)
+                else:
+                    mtime = os.path.getmtime(src_path)
+                    date_str = datetime.fromtimestamp(
+                        mtime).strftime("%Y-%m-%d %H:%M:%S")
+                    # print(date_str)
+                    # print(mp3_path)
+
                 front = "---\nlayout: default\n"
                 if date_str:
                     front += f"date: {date_str}\n"
                 front += "---\n\n"
-                
+
                 txt = front + txt
 
             with open(dst_path, "w", encoding="utf-8") as fp:
                 fp.write(txt)
 
-            print(f"{src_path}  -->  {dst_path}")
+            # print(f"{src_path}  -->  {dst_path}")
