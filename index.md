@@ -7,6 +7,6 @@ title: 目录
 
 <ul>
 {% for post in site.posts | sort: 'date' | reverse %}
-  <li><a href="/summary{{ post.url }}">{{ post.title }}</a></li>
+  <li><a href="/summary{{ post.url }}">{{ post.date}}</a></li>
 {% endfor %}
 </ul>
