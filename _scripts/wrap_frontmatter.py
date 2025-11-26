@@ -1,10 +1,10 @@
 import os
 import re
 from pathlib import Path
+from datetime import datetime
 
 SRC_ROOT = Path("_raw_output")
 DST_ROOT = Path("_posts")
-FRONT = "---\nlayout: default\n---\n\n"
 
 DST_ROOT.mkdir(exist_ok=True)
 
@@ -35,7 +35,19 @@ for root, _, files in os.walk(SRC_ROOT):
 
             # 如果没有 front matter，就加上
             if not txt.startswith("---"):
-                txt = FRONT + txt
+                date_str = ""
+                mp3_path = root_path / "audio.mp3"
+                if mp3_path.exists():
+                    # 获取 mp3 文件的修改时间
+                    mtime = os.path.getmtime(mp3_path)
+                    date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
+                
+                front = "---\nlayout: default\n"
+                if date_str:
+                    front += f"date: {date_str}\n"
+                front += "---\n\n"
+                
+                txt = front + txt
 
             with open(dst_path, "w", encoding="utf-8") as fp:
                 fp.write(txt)
