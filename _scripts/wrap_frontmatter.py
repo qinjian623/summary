@@ -57,7 +57,7 @@ for root, _, files in os.walk(SRC_ROOT):
                 print(date_str)
                 front = "---\nlayout: default\n"
                 if date_str:
-                    front += f"date: {date_str}\n"
+                    front += f"cdate: {date_str}\n"
                 front += "---\n\n"
 
                 txt = front + txt
